@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Poppins, sans-serif;;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  background-color: #0260B1;
+  color: white;
+  padding: 15px 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;  
+}
+
+.items {
+  display: flex;
+  flex-basis: 60%;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #FAFAFB;
+}
+
+.item {
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  margin: 10px;
+  padding: 10px;
+  width: 250px;
+  background-color: white;
+}
+
+.item:hover {
+  box-shadow: 0px 0px .5em rgb(124, 123, 123);
+  transition: 200ms;
+}
+
+.item__id {
+  display: none;
+}
+
+.item__title {
+  flex-grow: 1;
+  padding: 10px;
+  text-align: center;
+}
+
+.item__image {
+  width: 100%;
+}
+
+.item__price {
+  color: #FF6500;
+  font-weight: 550;
+  margin: 10px;
+  font-size: 18pt;
+}
+
+.item__add {
+  background-color: #0260B1;
+  color: white;
+  border-radius: 5px;
+  border: 0;
+  margin: 0;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.cart {
+  padding: 10px;
+  display: flex;
+  flex-basis: 30%;
+  flex-flow: column wrap;
+}
+
+.cart__title {
+  flex-basis: 1;
+  font-size: 16pt;
+  text-align: center;
+}
+
+.total-price {
+  padding: 10px;
+  color: #FF6500;
+  font-weight: 550;
+}
+
+.empty-cart {
+  background-color: #0260B1;
+  border: 0;
+  padding: 5px;
+  color: white;
+  border-radius: 5px;
+}
+
+.cart__items {
+  list-style: none;
+}
+
+.cart__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0;
+  padding-bottom: 20px;
+  border-bottom: 1px solid grey;
+}
+
+.image__cart {
+  width: 100px;
+}
+
+.title__cart {
+  text-align: left;
+  margin: 10px;
+}
+
+.price__cart {
+  color: #FF6500;
+  font-size: 15pt;
+  padding: 10px;
+}
+
+.price-trash {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.remove-product {
+  width: 50px;
+  height: 30px;
+  border: 1px solid #FF6500;
+  background-color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #FF6500;
+  font-size: 15pt;
+}
+
+.remove-product:hover {
+  background-color: #FF6500;
+  color: white;
+  transition: .1s;
+}
