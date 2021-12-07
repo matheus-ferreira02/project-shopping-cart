@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="https://unpkg.com/@tabler/icons@latest/iconfont/tabler-icons.min.css">
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <script src="./helpers/fetchItem.js" defer></script>
+    <script src="./helpers/fetchProducts.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <h1>Shopping Cart</h1>
+    </header>
+
+    <main class="container">
+      <section class="items"></section>
+
+      <section class="cart">
+        <p class="cart__title">Carrinho</p>
+
+        <p class="total-price">TOTAL: R$ 0.00</p>
+
+        <button class="empty-cart">Esvaziar carrinho</button>
+
+        <ul class="cart__items"></ul>
+      </section>
+    </main>
+  </body>
+</html>
