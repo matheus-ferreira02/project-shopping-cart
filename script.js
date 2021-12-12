@@ -30,7 +30,9 @@ const createProductItemElement = ({id, title, thumbnail, price}) => {
   div.appendChild(createElementHTML('span', 'item__id', id));
   div.appendChild(createElementHTML('span', 'item__title', title));
   div.appendChild(createImageElement(thumbnail, 'item__image'));
-  div.appendChild(createElementHTML('span', 'item__price', `R$ ${price.toFixed(2)}`));
+
+  const moeda =  { style: 'currency', currency: 'BRL' };
+  div.appendChild(createElementHTML('span', 'item__price', price.toLocaleString('pt-BR', moeda)));
   div.appendChild(createElementHTML('button', 'item__add', 'Adicionar ao carrinho!'));
 
   return div
@@ -64,6 +66,7 @@ const removeItem = (event) => {
   }
   const price = item.lastChild.lastChild.id;
   totalPrice(-price);
+  saveLocalStorage(item.id);
   item.remove();
 }
 
@@ -90,20 +93,22 @@ const createCartItemElement = ({ id, title, price, thumbnail }) => {
 
 let total = 0;
 const totalPrice = (price) => {
+  const moeda =  { style: 'currency', currency: 'BRL' };
   const totalElement = document.querySelector('.total-price');
   total += price;
   if (total < 0) {
-    totalElement.innerText = 'R$ 0.00';
+    totalElement.innerText = `TOTAL: ${0.00.toLocaleString('pt-BR', moeda)}`;
   } else {
-    totalElement.innerText = `TOTAL: R$ ${total.toFixed(2)}`;
+    totalElement.innerText = `TOTAL: ${total.toLocaleString('pt-BR', moeda)}`;
   }
 }
 
-const addItemCart = ((data) => {
+const addItemCart = (data) => {
   const ul = document.querySelector('.cart__items');
   ul.appendChild(createCartItemElement(data));
   totalPrice(data.price);
-})
+  saveLocalStorage(data.id);
+}
 
 const verifyItem = (data) => {
   const liItems = document.querySelectorAll('.cart__item');
@@ -126,10 +131,43 @@ const eventAddCart = () => {
   })
 }
 
+const clearCart = () => {  
+  const totalElement = document.querySelector('.total-price');
+  const li = document.querySelectorAll('.cart__item');    
+  li.forEach((element) => {
+    saveLocalStorage(element.id);
+    element.remove();
+  });
+
+  const moeda =  { style: 'currency', currency: 'BRL' };    
+  total = 0;
+  totalElement.innerText = `TOTAL: ${0.00.toLocaleString('pt-BR', moeda)}`;  
+}
+
+const btn = document.querySelector('.empty-cart');
+btn.addEventListener('click', clearCart);
+
+const addItemCartFromLocalStorage = (data) => {
+  const ul = document.querySelector('.cart__items');
+  ul.appendChild(createCartItemElement(data));
+  totalPrice(data.price);
+}
+
+const getLocalStorage = () => {
+  const items = getItemLocalStorage();
+  if (items.length > 0) {
+    items.split(',').forEach(async (item) => {
+      const data = await fetchItem(item);
+      addItemCart(data);
+    })
+  }
+}
+
 window.onload = async () => {
   addLoadText();
   const data = await fetchProducts('computador');
   removeLoadText();
   showProducts(data);
-  eventAddCart();
+  eventAddCart(); 
+  getLocalStorage(); 
 }

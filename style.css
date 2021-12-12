@@ -103,6 +103,7 @@
   padding: 5px;
   color: white;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .cart__items {
