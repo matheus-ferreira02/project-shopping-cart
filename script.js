@@ -93,7 +93,7 @@ const totalPrice = (price) => {
   const totalElement = document.querySelector('.total-price');
   total += price;
   if (total < 0) {
-    totalElement.innerText = 'R$ 0.00';
+    totalElement.innerText = 'TOTAL: R$ 0.00';
   } else {
     totalElement.innerText = `TOTAL: R$ ${total.toFixed(2)}`;
   }
@@ -126,10 +126,21 @@ const eventAddCart = () => {
   })
 }
 
+const eventClearCart = () => {
+  const btn = document.querySelector('.empty-cart');
+  btn.addEventListener('click', () => {
+    const ul = document.querySelector('.cart__items');
+    const totalElement = document.querySelector('.total-price');
+    ul.innerHTML = '';
+    totalElement.innerText = 'TOTAL: R$ 0.00';
+  })
+}
+
 window.onload = async () => {
   addLoadText();
   const data = await fetchProducts('computador');
   removeLoadText();
   showProducts(data);
   eventAddCart();
+  eventClearCart();
 }
