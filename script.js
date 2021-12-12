@@ -30,7 +30,9 @@ const createProductItemElement = ({id, title, thumbnail, price}) => {
   div.appendChild(createElementHTML('span', 'item__id', id));
   div.appendChild(createElementHTML('span', 'item__title', title));
   div.appendChild(createImageElement(thumbnail, 'item__image'));
-  div.appendChild(createElementHTML('span', 'item__price', `R$ ${price.toFixed(2)}`));
+
+  const moeda =  { style: 'currency', currency: 'BRL' };
+  div.appendChild(createElementHTML('span', 'item__price', price.toLocaleString('pt-BR', moeda)));
   div.appendChild(createElementHTML('button', 'item__add', 'Adicionar ao carrinho!'));
 
   return div
@@ -91,12 +93,13 @@ const createCartItemElement = ({ id, title, price, thumbnail }) => {
 
 let total = 0;
 const totalPrice = (price) => {
+  const moeda =  { style: 'currency', currency: 'BRL' };
   const totalElement = document.querySelector('.total-price');
   total += price;
   if (total < 0) {
-    totalElement.innerText = 'TOTAL: R$ 0.00';
+    totalElement.innerText = `TOTAL: ${0.00.toLocaleString('pt-BR', moeda)}`;
   } else {
-    totalElement.innerText = `TOTAL: R$ ${total.toFixed(2)}`;
+    totalElement.innerText = `TOTAL: ${total.toLocaleString('pt-BR', moeda)}`;
   }
 }
 
@@ -135,8 +138,10 @@ const clearCart = () => {
     saveLocalStorage(element.id);
     element.remove();
   });
-    
-  totalElement.innerText = 'TOTAL: R$ 0.00';  
+
+  const moeda =  { style: 'currency', currency: 'BRL' };    
+  total = 0;
+  totalElement.innerText = `TOTAL: ${0.00.toLocaleString('pt-BR', moeda)}`;  
 }
 
 const btn = document.querySelector('.empty-cart');
