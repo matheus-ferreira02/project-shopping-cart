@@ -64,6 +64,7 @@ const removeItem = (event) => {
   }
   const price = item.lastChild.lastChild.id;
   totalPrice(-price);
+  saveLocalStorage(item.id);
   item.remove();
 }
 
@@ -102,6 +103,7 @@ const totalPrice = (price) => {
 const addItemCart = ((data) => {
   const ul = document.querySelector('.cart__items');
   ul.appendChild(createCartItemElement(data));
+  saveLocalStorage(data.id);
   totalPrice(data.price);
 })
 
